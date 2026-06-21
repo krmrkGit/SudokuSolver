@@ -11,6 +11,14 @@ It is known that at least 4 clues are needed in any valid 4\*4 Sudoku, so there 
 *   DistinctFour: key helper function which takes a group of four entries in the Sudoku (i.e. row/column/box) and checks whether all the entries are distinct.
 *   increment_counter: helper function used to increment the counter registers (in order to keep track of the occurences where the same number appears more than once in the same group of four).
 
+Note that the main function SudokuSolver takes a 4\*4 matrix representing a board of Sudoku and returns the collection:
+1. the full Grover search quantum circuit
+1. a 4\*4 matrix recording clues and indices of memory quantum registers
+1. the marker quantum circuit
+1. the diffuser quantum circuit
+
+In order to construct a solution of Sudoku as a 4\*4 matrix, one needs to take measurements of the first quantum circuit and post-process using the matrix. This is done for two sample Sudoku problems in 'Sudoku_Solver_Grover.ipynb'. 
+
 # Overview of the program
 Let $0\leq N\leq 12$ be the number of unknown entries. We build a quantum circuit which performs Grover search algorithm over the space of possible solutions (which has size $4^N$). A 4\*4 Sudoku board has 12 groups of four that need to be validated (i.e. rows/columns/2\*2 boxes). In each group of four, all four numbers must be pairwise distinct from each other, so this requires 6 checks. In total, validating a particular solution of Suzoku requires at most $12*6=72$ checks. Motivated by this, we use the following set of registers.
 
